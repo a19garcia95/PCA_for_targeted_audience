@@ -1,0 +1,1223 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{report}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \#
+
+Analyzing customers for targeted marketing
+
+    \subsection{1.) Introduction}\label{introduction}
+
+\subsection{2.) Dataset}\label{dataset}
+
+\subsection{3.) Exploratory Data
+Analysis}\label{exploratory-data-analysis}
+
+\subsection{4.) Data Wrangling}\label{data-wrangling}
+
+\subsection{5.) Machine Learning}\label{machine-learning}
+
+\subsection{6.) Conclusion}\label{conclusion}
+
+    \#\#\#
+
+Introduction
+
+    \paragraph{An e-commerce clothing brand that wishes to break into a new
+market. Data is collected from a sample of potential customers from that
+market. Data includes behavioral spending patterns. The goal of this
+project is to cluster customers so the e-commerce company can target
+those customers who are more likely to spend on clothes. Lastly, we also
+have unseen data to test our
+algorithm.}\label{an-e-commerce-clothing-brand-that-wishes-to-break-into-a-new-market.-data-is-collected-from-a-sample-of-potential-customers-from-that-market.-data-includes-behavioral-spending-patterns.-the-goal-of-this-project-is-to-cluster-customers-so-the-e-commerce-company-can-target-those-customers-who-are-more-likely-to-spend-on-clothes.-lastly-we-also-have-unseen-data-to-test-our-algorithm.}
+
+    \#\#\#
+
+Dataset
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{millenial\PYZus{}market\PYZus{}research.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}     Age  Gender  Music  Movies/Theaters  Tech/Gadgets  Museums  Food/Dining  \textbackslash{}
+        0  17.0    male    7.3              8.1           2.8      1.6          4.5   
+        1  21.0  female    9.4              9.3           2.2      2.2          3.2   
+        2  19.0  female    6.8              7.5           6.4      2.1          7.8   
+        3  26.0  female    4.5              6.8           1.3      8.5          8.0   
+        4  19.0  female    9.1              9.8           1.4      3.9          3.1   
+        
+           Camping/Hiking  Concerts  Clubs/Dancing       {\ldots}         Art  Shopping  \textbackslash{}
+        0             7.1       0.3            0.6       {\ldots}         2.9       9.9   
+        1             9.5       5.4            1.3       {\ldots}         0.6       3.0   
+        2             4.4       1.9            5.8       {\ldots}         4.7       4.4   
+        3             7.4       1.5            6.2       {\ldots}         1.1       1.8   
+        4             5.4       8.2            4.7       {\ldots}         4.5       4.4   
+        
+           Social Media  Reading  Socializing  Gaming  Entertainment Spending  \textbackslash{}
+        0           4.4      1.4          8.7     6.7                     9.7   
+        1           5.7      4.5          5.3     9.5                     5.3   
+        2           2.7      8.5         10.0     3.5                     3.5   
+        3           5.5      9.8          5.1     7.0                     3.5   
+        4           5.1      5.0          6.8     3.0                     2.0   
+        
+           Clothing Spending  Internet Spending  Retail Spending  
+        0                8.6                9.5              8.2  
+        1                3.5                4.2             10.0  
+        2                5.2                0.1              3.1  
+        3                2.3                0.3              7.2  
+        4                5.9                5.6              8.2  
+        
+        [5 rows x 23 columns]
+\end{Verbatim}
+            
+    \#\#\#
+
+Exploratory Data Analysis
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} Age                       10000
+        Gender                    10000
+        Music                     10000
+        Movies/Theaters           10000
+        Tech/Gadgets              10000
+        Museums                   10000
+        Food/Dining               10000
+        Camping/Hiking            10000
+        Concerts                  10000
+        Clubs/Dancing             10000
+        Writing                   10000
+        Sports                    10000
+        Gardening                 10000
+        Art                       10000
+        Shopping                  10000
+        Social Media              10000
+        Reading                   10000
+        Socializing               10000
+        Gaming                    10000
+        Entertainment Spending    10000
+        Clothing Spending         10000
+        Internet Spending         10000
+        Retail Spending           10000
+        dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} False
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{df}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} False
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 10000 entries, 0 to 9999
+Data columns (total 23 columns):
+Age                       10000 non-null float64
+Gender                    10000 non-null object
+Music                     10000 non-null float64
+Movies/Theaters           10000 non-null float64
+Tech/Gadgets              10000 non-null float64
+Museums                   10000 non-null float64
+Food/Dining               10000 non-null float64
+Camping/Hiking            10000 non-null float64
+Concerts                  10000 non-null float64
+Clubs/Dancing             10000 non-null float64
+Writing                   10000 non-null float64
+Sports                    10000 non-null float64
+Gardening                 10000 non-null float64
+Art                       10000 non-null float64
+Shopping                  10000 non-null float64
+Social Media              10000 non-null float64
+Reading                   10000 non-null float64
+Socializing               10000 non-null float64
+Gaming                    10000 non-null float64
+Entertainment Spending    10000 non-null float64
+Clothing Spending         10000 non-null float64
+Internet Spending         10000 non-null float64
+Retail Spending           10000 non-null float64
+dtypes: float64(22), object(1)
+memory usage: 1.8+ MB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}                 Age         Music  Movies/Theaters  Tech/Gadgets  \textbackslash{}
+        count  10000.000000  10000.000000     10000.000000  10000.000000   
+        mean      20.386600      8.485650         8.221250      4.334410   
+        std        2.780596      1.401132         1.488302      2.922271   
+        min       15.000000      0.000000         0.100000      0.000000   
+        25\%       19.000000      8.200000         7.600000      1.700000   
+        50\%       20.000000      8.800000         8.600000      4.000000   
+        75\%       21.000000      9.400000         9.300000      6.700000   
+        max       30.000000     10.000000        10.000000     10.000000   
+        
+                    Museums  Food/Dining  Camping/Hiking      Concerts  Clubs/Dancing  \textbackslash{}
+        count  10000.000000  10000.00000    10000.000000  10000.000000   10000.000000   
+        mean       4.226790      3.51436        6.339660      3.859940       3.683200   
+        std        2.702377      2.68117        2.471258      2.946626       3.085511   
+        min        0.000000      0.00000        0.000000      0.000000       0.000000   
+        25\%        1.900000      1.20000        4.700000      1.300000       1.100000   
+        50\%        4.000000      2.90000        6.700000      3.200000       2.500000   
+        75\%        6.125000      5.40000        8.300000      6.000000       6.100000   
+        max       10.000000     10.00000       10.000000     10.000000      10.000000   
+        
+                    Writing       {\ldots}                  Art      Shopping  \textbackslash{}
+        count  10000.000000       {\ldots}         10000.000000  10000.000000   
+        mean       2.783220       {\ldots}             3.694960      5.537580   
+        std        2.641601       {\ldots}             2.597541      2.626148   
+        min        0.000000       {\ldots}             0.000000      0.000000   
+        25\%        0.875000       {\ldots}             1.500000      3.500000   
+        50\%        1.700000       {\ldots}             3.300000      5.600000   
+        75\%        4.200000       {\ldots}             5.600000      7.700000   
+        max       10.000000       {\ldots}            10.000000     10.000000   
+        
+               Social Media       Reading   Socializing        Gaming  \textbackslash{}
+        count  10000.000000  10000.000000  10000.000000  10000.000000   
+        mean       5.471920      5.067150      8.144480      5.663800   
+        std        2.617237      2.725082      1.537818      3.150193   
+        min        0.000000      0.000000      2.000000      0.000000   
+        25\%        3.500000      2.900000      7.400000      2.700000   
+        50\%        5.500000      5.000000      8.600000      6.100000   
+        75\%        7.600000      7.300000      9.300000      8.600000   
+        max       10.000000     10.000000     10.000000     10.000000   
+        
+               Entertainment Spending  Clothing Spending  Internet Spending  \textbackslash{}
+        count            10000.000000       10000.000000       10000.000000   
+        mean                 5.422330           5.240530           4.785600   
+        std                  2.438987           2.460029           2.631747   
+        min                  0.000000           0.000000           0.000000   
+        25\%                  3.700000           3.400000           2.700000   
+        50\%                  5.400000           5.300000           4.700000   
+        75\%                  7.300000           7.100000           6.800000   
+        max                 10.000000          10.000000          10.000000   
+        
+               Retail Spending  
+        count     10000.000000  
+        mean          6.113950  
+        std           2.254891  
+        min           0.000000  
+        25\%           4.600000  
+        50\%           6.300000  
+        75\%           7.800000  
+        max          10.000000  
+        
+        [8 rows x 22 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{df}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:}                              Age     Music  Movies/Theaters  Tech/Gadgets  \textbackslash{}
+        Age                     1.000000 -0.071404        -0.032861      0.049297   
+        Music                  -0.071404  1.000000         0.168541     -0.002268   
+        Movies/Theaters        -0.032861  0.168541         1.000000      0.054879   
+        Tech/Gadgets            0.049297 -0.002268         0.054879      1.000000   
+        Museums                 0.023706  0.044854         0.054395     -0.092826   
+        Food/Dining             0.034932 -0.007305        -0.021373     -0.054901   
+        Camping/Hiking          0.064568  0.080073         0.054241      0.005400   
+        Concerts               -0.002136  0.107177         0.056767     -0.062512   
+        Clubs/Dancing          -0.001543  0.101726        -0.034442     -0.051267   
+        Writing                 0.032917  0.034163        -0.007181     -0.168813   
+        Sports                  0.010770  0.011773         0.035426      0.235932   
+        Gardening               0.087740 -0.002706        -0.004820     -0.017819   
+        Art                    -0.031547  0.041166         0.102754      0.017955   
+        Shopping               -0.123566  0.103254         0.121079     -0.018813   
+        Social Media            0.097224  0.028320         0.067204      0.307223   
+        Reading                 0.037083  0.085666         0.082228     -0.173863   
+        Socializing            -0.076566  0.197688         0.155671      0.069157   
+        Gaming                 -0.043938  0.074207         0.108316      0.016821   
+        Entertainment Spending -0.043698  0.045703         0.071656      0.130339   
+        Clothing Spending      -0.079546  0.092160         0.065289      0.072743   
+        Internet Spending      -0.012542  0.004195         0.106014      0.293165   
+        Retail Spending         0.004743  0.058070         0.010685      0.059534   
+        
+                                 Museums  Food/Dining  Camping/Hiking  Concerts  \textbackslash{}
+        Age                     0.023706     0.034932        0.064568 -0.002136   
+        Music                   0.044854    -0.007305        0.080073  0.107177   
+        Movies/Theaters         0.054395    -0.021373        0.054241  0.056767   
+        Tech/Gadgets           -0.092826    -0.054901        0.005400 -0.062512   
+        Museums                 1.000000     0.246781        0.245504  0.231917   
+        Food/Dining             0.246781     1.000000        0.217308  0.147504   
+        Camping/Hiking          0.245504     0.217308        1.000000  0.226031   
+        Concerts                0.231917     0.147504        0.226031  1.000000   
+        Clubs/Dancing           0.282887     0.251260        0.216383  0.215670   
+        Writing                 0.336356     0.194001        0.066437  0.153924   
+        Sports                  0.000237    -0.021753        0.092645  0.221547   
+        Gardening               0.213505     0.145903        0.242661  0.217748   
+        Art                     0.032338    -0.071957       -0.020716  0.149597   
+        Shopping                0.114030    -0.012112        0.032631  0.250630   
+        Social Media            0.021101     0.071891        0.054334 -0.053998   
+        Reading                 0.541309     0.180555        0.211739  0.259666   
+        Socializing             0.070987    -0.042491        0.054368  0.144199   
+        Gaming                  0.054911    -0.041373        0.109088  0.091409   
+        Entertainment Spending  0.026435    -0.083160       -0.070372  0.007267   
+        Clothing Spending       0.051895    -0.059216       -0.056388  0.158383   
+        Internet Spending      -0.041650    -0.060884       -0.048324 -0.005129   
+        Retail Spending         0.094143    -0.026182        0.087006  0.079134   
+        
+                                Clubs/Dancing   Writing       {\ldots}              Art  \textbackslash{}
+        Age                         -0.001543  0.032917       {\ldots}        -0.031547   
+        Music                        0.101726  0.034163       {\ldots}         0.041166   
+        Movies/Theaters             -0.034442 -0.007181       {\ldots}         0.102754   
+        Tech/Gadgets                -0.051267 -0.168813       {\ldots}         0.017955   
+        Museums                      0.282887  0.336356       {\ldots}         0.032338   
+        Food/Dining                  0.251260  0.194001       {\ldots}        -0.071957   
+        Camping/Hiking               0.216383  0.066437       {\ldots}        -0.020716   
+        Concerts                     0.215670  0.153924       {\ldots}         0.149597   
+        Clubs/Dancing                1.000000  0.316432       {\ldots}        -0.051388   
+        Writing                      0.316432  1.000000       {\ldots}         0.018504   
+        Sports                       0.033086 -0.001682       {\ldots}         0.029310   
+        Gardening                    0.163847  0.211385       {\ldots}         0.132446   
+        Art                         -0.051388  0.018504       {\ldots}         1.000000   
+        Shopping                    -0.056642  0.001256       {\ldots}         0.459960   
+        Social Media                 0.041472  0.045665       {\ldots}        -0.137035   
+        Reading                      0.208205  0.247306       {\ldots}         0.027576   
+        Socializing                  0.039980 -0.038086       {\ldots}         0.066582   
+        Gaming                      -0.011205  0.005247       {\ldots}         0.137589   
+        Entertainment Spending      -0.022475 -0.053478       {\ldots}         0.036590   
+        Clothing Spending           -0.033141  0.003836       {\ldots}         0.299727   
+        Internet Spending           -0.046308 -0.044473       {\ldots}         0.057818   
+        Retail Spending             -0.025401  0.034375       {\ldots}         0.027884   
+        
+                                Shopping  Social Media   Reading  Socializing  \textbackslash{}
+        Age                    -0.123566      0.097224  0.037083    -0.076566   
+        Music                   0.103254      0.028320  0.085666     0.197688   
+        Movies/Theaters         0.121079      0.067204  0.082228     0.155671   
+        Tech/Gadgets           -0.018813      0.307223 -0.173863     0.069157   
+        Museums                 0.114030      0.021101  0.541309     0.070987   
+        Food/Dining            -0.012112      0.071891  0.180555    -0.042491   
+        Camping/Hiking          0.032631      0.054334  0.211739     0.054368   
+        Concerts                0.250630     -0.053998  0.259666     0.144199   
+        Clubs/Dancing          -0.056642      0.041472  0.208205     0.039980   
+        Writing                 0.001256      0.045665  0.247306    -0.038086   
+        Sports                  0.033294      0.136206 -0.051884     0.103949   
+        Gardening               0.142955      0.035325  0.156246     0.021505   
+        Art                     0.459960     -0.137035  0.027576     0.066582   
+        Shopping                1.000000     -0.107422  0.147850     0.173518   
+        Social Media           -0.107422      1.000000  0.012539     0.018387   
+        Reading                 0.147850      0.012539  1.000000     0.145601   
+        Socializing             0.173518      0.018387  0.145601     1.000000   
+        Gaming                  0.178581      0.030771  0.092676     0.062998   
+        Entertainment Spending  0.035679      0.089676 -0.007857     0.242676   
+        Clothing Spending       0.492331     -0.028645  0.055946     0.156786   
+        Internet Spending       0.026846      0.278047 -0.039291     0.091446   
+        Retail Spending         0.097629      0.122667  0.080410     0.128596   
+        
+                                  Gaming  Entertainment Spending  Clothing Spending  \textbackslash{}
+        Age                    -0.043938               -0.043698          -0.079546   
+        Music                   0.074207                0.045703           0.092160   
+        Movies/Theaters         0.108316                0.071656           0.065289   
+        Tech/Gadgets            0.016821                0.130339           0.072743   
+        Museums                 0.054911                0.026435           0.051895   
+        Food/Dining            -0.041373               -0.083160          -0.059216   
+        Camping/Hiking          0.109088               -0.070372          -0.056388   
+        Concerts                0.091409                0.007267           0.158383   
+        Clubs/Dancing          -0.011205               -0.022475          -0.033141   
+        Writing                 0.005247               -0.053478           0.003836   
+        Sports                  0.052906                0.103712           0.095491   
+        Gardening               0.154157               -0.114303          -0.009075   
+        Art                     0.137589                0.036590           0.299727   
+        Shopping                0.178581                0.035679           0.492331   
+        Social Media            0.030771                0.089676          -0.028645   
+        Reading                 0.092676               -0.007857           0.055946   
+        Socializing             0.062998                0.242676           0.156786   
+        Gaming                  1.000000                0.008179           0.078676   
+        Entertainment Spending  0.008179                1.000000           0.369864   
+        Clothing Spending       0.078676                0.369864           1.000000   
+        Internet Spending       0.055776                0.336206           0.324058   
+        Retail Spending         0.033115                0.129498           0.226647   
+        
+                                Internet Spending  Retail Spending  
+        Age                             -0.012542         0.004743  
+        Music                            0.004195         0.058070  
+        Movies/Theaters                  0.106014         0.010685  
+        Tech/Gadgets                     0.293165         0.059534  
+        Museums                         -0.041650         0.094143  
+        Food/Dining                     -0.060884        -0.026182  
+        Camping/Hiking                  -0.048324         0.087006  
+        Concerts                        -0.005129         0.079134  
+        Clubs/Dancing                   -0.046308        -0.025401  
+        Writing                         -0.044473         0.034375  
+        Sports                           0.136330         0.144912  
+        Gardening                       -0.055597         0.014816  
+        Art                              0.057818         0.027884  
+        Shopping                         0.026846         0.097629  
+        Social Media                     0.278047         0.122667  
+        Reading                         -0.039291         0.080410  
+        Socializing                      0.091446         0.128596  
+        Gaming                           0.055776         0.033115  
+        Entertainment Spending           0.336206         0.129498  
+        Clothing Spending                0.324058         0.226647  
+        Internet Spending                1.000000         0.212686  
+        Retail Spending                  0.212686         1.000000  
+        
+        [22 rows x 22 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{df}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k+kn}{import} \PY{n+nn}{math}
+         \PY{c+c1}{\PYZsh{} Set plotting style}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set\PYZus{}style}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{whitegrid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Rounding the integer to the next hundredth value plus an offset of 100}
+         \PY{k}{def} \PY{n+nf}{roundup}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{l+m+mi}{100} \PY{o}{+} \PY{n+nb}{int}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{n}{x} \PY{o}{/} \PY{l+m+mf}{100.0}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{100} 
+         
+         
+         \PY{n}{sns}\PY{o}{.}\PY{n}{factorplot}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gender}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{aspect}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Get current axis on current figure}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} ylim max value to be set}
+         \PY{n}{y\PYZus{}max} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gender}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)} 
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{roundup}\PY{p}{(}\PY{n}{y\PYZus{}max}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Iterate through the list of axes\PYZsq{} patches}
+         \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{ax}\PY{o}{.}\PY{n}{patches}\PY{p}{:}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{n}{p}\PY{o}{.}\PY{n}{get\PYZus{}x}\PY{p}{(}\PY{p}{)} \PY{o}{+} \PY{n}{p}\PY{o}{.}\PY{n}{get\PYZus{}width}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{2.}\PY{p}{,} \PY{n}{p}\PY{o}{.}\PY{n}{get\PYZus{}height}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n+nb}{int}\PY{p}{(}\PY{n}{p}\PY{o}{.}\PY{n}{get\PYZus{}height}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,} 
+                     \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{va}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bottom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \#\#\#
+
+Data Wrangling
+
+    \paragraph{Fortunately, the data provided is pretty clean. All numerical
+categories except gender, which we will change in cells
+below.}\label{fortunately-the-data-provided-is-pretty-clean.-all-numerical-categories-except-gender-which-we-will-change-in-cells-below.}
+
+\paragraph{We are also interested in customers that spend on the
+internet as well as
+clothing.}\label{we-are-also-interested-in-customers-that-spend-on-the-internet-as-well-as-clothing.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{}changing categorical column to numerical}
+         \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gender}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gender}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{female}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{male}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Clothing Spending}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{5}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Internet Spending}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:}      Age  Gender  Music  Movies/Theaters  Tech/Gadgets  Museums  Food/Dining  \textbackslash{}
+         0   17.0       0    7.3              8.1           2.8      1.6          4.5   
+         4   19.0       1    9.1              9.8           1.4      3.9          3.1   
+         18  20.0       1    9.7              9.4           5.1      4.4          0.7   
+         20  19.0       0    7.4              9.8           6.4      4.6          3.7   
+         21  19.0       0    6.6              8.5           9.5      7.5          0.4   
+         
+             Camping/Hiking  Concerts  Clubs/Dancing       {\ldots}         Art  Shopping  \textbackslash{}
+         0              7.1       0.3            0.6       {\ldots}         2.9       9.9   
+         4              5.4       8.2            4.7       {\ldots}         4.5       4.4   
+         18             5.8       0.7            1.7       {\ldots}         5.0      10.0   
+         20             5.8       1.5            1.0       {\ldots}         4.9       7.2   
+         21             9.4       8.6            5.4       {\ldots}         4.8       5.6   
+         
+             Social Media  Reading  Socializing  Gaming  Entertainment Spending  \textbackslash{}
+         0            4.4      1.4          8.7     6.7                     9.7   
+         4            5.1      5.0          6.8     3.0                     2.0   
+         18           3.6      4.8          9.4     8.5                     7.4   
+         20           0.3      4.6          7.7     7.3                     4.8   
+         21           7.5      7.9          2.2     1.7                     8.6   
+         
+             Clothing Spending  Internet Spending  Retail Spending  
+         0                 8.6                9.5              8.2  
+         4                 5.9                5.6              8.2  
+         18                7.2                6.2              6.4  
+         20                5.3                5.7              5.2  
+         21                5.1                5.4              4.2  
+         
+         [5 rows x 23 columns]
+\end{Verbatim}
+            
+    \#\#\#
+
+Machine Learning
+
+    \paragraph{A big part of machine learning is to decide which algorithm
+and
+why.}\label{a-big-part-of-machine-learning-is-to-decide-which-algorithm-and-why.}
+
+\paragraph{For any type of segmenting problem, a clustering algorithm
+works really well. It detects certain behaviors and patterns and its
+able to separate them into clusters. This in fact is exactly what we
+need, a market segmentation
+solution.}\label{for-any-type-of-segmenting-problem-a-clustering-algorithm-works-really-well.-it-detects-certain-behaviors-and-patterns-and-its-able-to-separate-them-into-clusters.-this-in-fact-is-exactly-what-we-need-a-market-segmentation-solution.}
+
+\paragraph{In the real world, you would want to try out a couple of
+clustering algorithms, test their performance, and ultimately choose the
+best one. For this project we will try K-means clustering. Clustering is
+the task of dividing the population or data points into a number of
+groups such that data points in the same groups are more similar to
+other data points in the same group than those in other groups. In
+simple words, the aim is to segregate groups with similar traits and
+assign them into
+clusters.}\label{in-the-real-world-you-would-want-to-try-out-a-couple-of-clustering-algorithms-test-their-performance-and-ultimately-choose-the-best-one.-for-this-project-we-will-try-k-means-clustering.-clustering-is-the-task-of-dividing-the-population-or-data-points-into-a-number-of-groups-such-that-data-points-in-the-same-groups-are-more-similar-to-other-data-points-in-the-same-group-than-those-in-other-groups.-in-simple-words-the-aim-is-to-segregate-groups-with-similar-traits-and-assign-them-into-clusters.}
+
+\paragraph{A well known supplement for k-means is called Principal
+Component Analysis which helps emphasize variation and bring out strong
+patterns in a dataset. It's often used to make data easy to explore and
+visualize. K-means and PCA are usually thought of as two very different
+problems: one as an algorithm for data clustering, and the other as a
+framework for data dimension reduction, but combined together they work
+really
+well.}\label{a-well-known-supplement-for-k-means-is-called-principal-component-analysis-which-helps-emphasize-variation-and-bring-out-strong-patterns-in-a-dataset.-its-often-used-to-make-data-easy-to-explore-and-visualize.-k-means-and-pca-are-usually-thought-of-as-two-very-different-problems-one-as-an-algorithm-for-data-clustering-and-the-other-as-a-framework-for-data-dimension-reduction-but-combined-together-they-work-really-well.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} eliminating for now, variables that represent behaviors}
+         \PY{n}{abt} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Entertainment Spending}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Clothing Spending}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Internet Spending}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Retail Spending}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k}{import} \PY{n}{PCA}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{p}{)}
+         \PY{n}{pca}\PY{o}{.}\PY{n}{fit}\PY{p}{(} \PY{n}{abt} \PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} PCA(copy=True, iterated\_power='auto', n\_components=None, random\_state=None,
+           svd\_solver='auto', tol=0.0, whiten=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} Explained Variance Ratio}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{barplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{pca}\PY{o}{.}\PY{n}{n\PYZus{}components\PYZus{}}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,}
+                     \PY{n}{y}\PY{o}{=}\PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Principal Component}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Explained Variance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} Cumulative Explained Variance}
+         \PY{n}{cumulative} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{barplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{pca}\PY{o}{.}\PY{n}{n\PYZus{}components\PYZus{}}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,}
+                     \PY{n}{y}\PY{o}{=}\PY{n}{cumulative}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{N Principal Components}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cumulative Explained Variance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{Capture atleast 80\% of the
+variance}\label{capture-atleast-80-of-the-variance}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster} \PY{k}{import} \PY{n}{KMeans}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} PCA transformation}
+         \PY{n}{pc\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(} \PY{n}{pca}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{abt}\PY{p}{)} \PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Rename Columns}
+         \PY{n}{pc\PYZus{}df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{pca}\PY{o}{.}\PY{n}{n\PYZus{}components\PYZus{}}\PY{p}{)}\PY{p}{]}
+         
+         \PY{n}{pc\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:}         PC1       PC2       PC3       PC4       PC5       PC6       PC7  \textbackslash{}
+         0 -4.718882 -2.960997  1.116481  2.548510 -0.199757 -1.365595 -0.791734   
+         1  0.491975  1.380983  1.128373  6.301044 -0.359154  0.709515 -1.014473   
+         2 -2.770408 -4.774232  1.598379  0.078869 -0.386427 -0.448358 -1.733045   
+         3 -3.041096 -3.171436  0.658393  2.253144  0.320050 -0.796833 -2.609572   
+         4  2.375304  1.511895 -0.941456 -0.373477  1.079997 -4.262592  0.463675   
+         
+                 PC8       PC9      PC10      PC11      PC12      PC13      PC14  \textbackslash{}
+         0 -5.314410  2.321042 -2.127782  2.549628 -0.703628  0.477296 -2.276950   
+         1  1.097250  1.166798  0.156752  1.311644  1.418522 -0.526075  0.050525   
+         2 -1.781863 -2.426829 -2.196854  1.731944 -2.267540 -1.811011 -1.876973   
+         3 -2.273643 -1.241404 -5.576016 -1.677364 -1.871108 -0.712583 -0.352017   
+         4  7.823742  0.350148  1.699506 -1.973704 -1.237663  0.716793 -0.425342   
+         
+                PC15      PC16      PC17      PC18      PC19  
+         0  2.987285  1.136840  0.809147  0.100033  0.606076  
+         1 -2.956461  0.213495 -0.668280 -1.945622 -0.374975  
+         2  1.532407 -1.276738 -0.521122 -0.068454 -0.291319  
+         3  0.611251  0.482353  0.841736 -1.471987  0.608281  
+         4 -2.357721  5.414301 -1.630552 -4.333861  0.544460  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} Create training set}
+         \PY{n}{pcs\PYZus{}to\PYZus{}keep} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{11}\PY{p}{)}\PY{p}{]}
+         \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{pc\PYZus{}df}\PY{p}{[}\PY{n}{pcs\PYZus{}to\PYZus{}keep}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Train K\PYZhy{}Means clustering algorithm}
+         \PY{n}{kmeans} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{kmeans}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} KMeans(algorithm='auto', copy\_x=True, init='k-means++', max\_iter=300,
+             n\_clusters=3, n\_init=10, n\_jobs=1, precompute\_distances='auto',
+             random\_state=None, tol=0.0001, verbose=0)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k}{def} \PY{n+nf}{predict\PYZus{}clusters}\PY{p}{(}\PY{n}{raw\PYZus{}data}\PY{p}{,} \PY{n}{trained\PYZus{}pca}\PY{p}{,} \PY{n}{trained\PYZus{}kmeans}\PY{p}{,} \PY{n}{n\PYZus{}pc}\PY{p}{)}\PY{p}{:}
+             \PY{n}{df\PYZus{}new} \PY{o}{=} \PY{n}{raw\PYZus{}data}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Filter to our target audience}
+             \PY{n}{df\PYZus{}new} \PY{o}{=} \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{p}{(}\PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Clothing Spending}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{5}\PY{p}{)} 
+                             \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Internet Spending}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} Engineer Features}
+             \PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gender}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Female}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{Female}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{female}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{male}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{abt\PYZus{}new} \PY{o}{=} \PY{n}{df\PYZus{}new}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Entertainment Spending}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Clothing Spending}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Internet Spending}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Retail Spending}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} PCA transformation}
+             \PY{n}{pc\PYZus{}df\PYZus{}new} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(} \PY{n}{trained\PYZus{}pca}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{abt\PYZus{}new}\PY{p}{)} \PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Rename Columns}
+             \PY{n}{pc\PYZus{}df\PYZus{}new}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+                                  \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{trained\PYZus{}pca}\PY{o}{.}\PY{n}{n\PYZus{}components\PYZus{}}\PY{p}{)}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} Create test set}
+             \PY{n}{pcs\PYZus{}to\PYZus{}keep} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n\PYZus{}pc}\PY{p}{)}\PY{p}{]}
+             \PY{n}{X\PYZus{}new} \PY{o}{=} \PY{n}{pc\PYZus{}df\PYZus{}new}\PY{p}{[}\PY{n}{pcs\PYZus{}to\PYZus{}keep}\PY{p}{]}
+         
+             \PY{c+c1}{\PYZsh{} Predict clusters}
+             \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{trained\PYZus{}kmeans}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}new}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{df\PYZus{}new}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Female}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Clothing Spending}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Internet Spending}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{raw\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unseen\PYZus{}raw\PYZus{}data.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{raw\PYZus{}df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:}      Age  Gender  Music  Movies/Theaters  Tech/Gadgets  Museums  Food/Dining  \textbackslash{}
+         0   21.0  female    9.5              7.2           0.8      3.5          3.8   
+         1   23.0  female    9.1              8.6           3.3      5.5          3.8   
+         2   19.0  female    8.2              9.5           0.9      4.3          4.1   
+         3   19.0  female    8.8              6.3           0.1      3.9          3.2   
+         4   22.0  female    9.6              9.9           4.5      5.6          1.0   
+         5   19.0    male    9.0              7.0           5.6      5.2          6.4   
+         6   21.0    male    8.4              7.7           2.3      2.1          8.9   
+         7   20.0    male    9.7              8.5           6.8      4.7          0.4   
+         8   28.0    male    9.9              8.2           1.2      0.7          5.4   
+         9   19.0  female   10.0              9.3           3.8      9.8          4.3   
+         10  21.0    male    8.4              9.2           7.0      2.3          5.0   
+         11  20.0    male    9.9              9.8           6.9      6.4          1.0   
+         12  18.0    male    8.5             10.0           8.1      3.9          4.9   
+         13  17.0    male    8.1              8.6           6.5      5.0          1.0   
+         14  30.0  female    7.9              9.5           8.4      1.0          1.9   
+         15  16.0  female    9.8              8.6           0.5      0.5          1.8   
+         16  21.0    male    8.6              9.5           5.6      3.8          0.5   
+         17  18.0  female    8.3              9.0           3.0      6.1          0.9   
+         18  21.0    male    8.8              7.7           0.7      0.3          3.4   
+         19  23.0    male    9.0              8.3           8.9      2.5          1.7   
+         20  18.0  female    8.6              7.9           1.2      2.2          1.9   
+         21  28.0  female    8.9              4.1           5.1      5.7          8.0   
+         22  19.0  female    9.7              9.4           0.1      7.2          5.3   
+         23  17.0  female    9.1              9.3           6.8      9.8          6.5   
+         24  17.0    male    9.7              8.1           8.2      5.0          8.0   
+         25  19.0    male   10.0              8.4           9.0      1.6          1.9   
+         26  18.0    male    8.7              4.7           7.7      2.3          1.4   
+         27  20.0  female    8.2              9.5           1.7      9.2          0.9   
+         28  22.0  female    9.5              8.7           6.7      3.8          7.6   
+         29  19.0    male    8.3              7.1           9.4      3.0          4.9   
+         30  19.0    male    7.5              8.7           4.0      0.9          0.3   
+         31  21.0  female    9.9              9.0           5.5      9.4          4.0   
+         32  17.0  female    8.1              8.5           1.5      2.1          1.5   
+         33  30.0    male    8.9              9.7           7.7      9.4         10.0   
+         34  18.0  female    9.7              7.2           8.9      0.6          0.4   
+         35  19.0  female    6.3              6.6           1.9      7.0          9.9   
+         36  20.0  female    9.5              9.6           3.3      7.7          2.9   
+         37  20.0    male    9.6              9.8           9.0      0.4          0.9   
+         38  20.0  female    9.4              9.5           6.4      3.3          3.0   
+         39  29.0    male    6.3              9.7           5.5      1.0          0.4   
+         40  19.0    male    6.1              9.6           4.7      1.6          1.1   
+         41  18.0  female    9.3              1.7           8.4      9.1          9.1   
+         42  17.0  female    8.5              8.8           4.6      0.6          3.9   
+         43  20.0    male   10.0              7.2           8.4      0.4          1.8   
+         44  25.0  female    9.1              8.8           0.8      9.0          0.6   
+         45  19.0  female    8.1              8.5           0.3      1.3          0.6   
+         46  21.0    male    9.4              8.1           7.6      5.4          6.3   
+         47  26.0    male    9.3              9.6           3.3      4.8          8.7   
+         48  23.0  female    5.8              6.8           7.4      2.5          4.2   
+         49  17.0  female    8.3             10.0           8.0      6.6          3.4   
+         
+             Camping/Hiking  Concerts  Clubs/Dancing       {\ldots}         Art  Shopping  \textbackslash{}
+         0              9.1       0.8            1.0       {\ldots}         5.8       4.2   
+         1              6.5       6.1            2.5       {\ldots}         5.4       4.2   
+         2              9.9       2.1            1.4       {\ldots}         9.5       4.2   
+         3              9.4       9.5            1.9       {\ldots}         1.9       5.1   
+         4              6.8       1.2            1.4       {\ldots}         2.7       5.1   
+         5              9.6       8.7            8.1       {\ldots}         0.7       1.8   
+         6              8.3       1.3            9.5       {\ldots}         4.0       6.8   
+         7              2.8       1.9            0.7       {\ldots}         4.5       5.4   
+         8              8.1       0.7            4.3       {\ldots}         5.2       2.3   
+         9              6.5       6.1            0.3       {\ldots}         4.4       6.2   
+         10             6.0       1.4            1.7       {\ldots}         4.8       2.6   
+         11             7.5       4.6            1.9       {\ldots}         3.4       5.1   
+         12             5.9       1.9            0.3       {\ldots}         0.1       3.9   
+         13             4.1       1.0            0.3       {\ldots}         2.2       5.7   
+         14             8.1       0.3            2.0       {\ldots}         0.9       1.0   
+         15             8.8       0.5            1.5       {\ldots}         3.9       9.8   
+         16             8.7       1.4            1.7       {\ldots}         3.9       2.2   
+         17             8.2       3.4            8.4       {\ldots}         0.3       8.5   
+         18             9.2       0.7            1.7       {\ldots}         1.8       2.2   
+         19             6.7       0.7            3.8       {\ldots}         0.8       2.0   
+         20             4.2       3.8            1.0       {\ldots}         2.2       5.2   
+         21             8.0       4.0            7.5       {\ldots}         7.0       7.5   
+         22             9.1       9.8            9.0       {\ldots}         7.1       7.6   
+         23             7.8       3.4            7.8       {\ldots}         0.8       3.5   
+         24             6.2       6.4            6.3       {\ldots}         2.5       4.7   
+         25             7.6       0.2            0.1       {\ldots}         7.9       9.4   
+         26             6.1       0.4            8.5       {\ldots}         4.1       5.8   
+         27             8.9       5.5            1.7       {\ldots}         5.8      10.0   
+         28             9.9       5.7            2.0       {\ldots}         6.8       7.2   
+         29             9.5       2.1            0.3       {\ldots}         0.1       3.5   
+         30             8.8       2.9            1.6       {\ldots}         0.1       1.0   
+         31             8.1       8.1            0.1       {\ldots}         8.2       8.3   
+         32             6.6       2.5            1.7       {\ldots}         2.8       4.9   
+         33             9.4       7.9            7.2       {\ldots}         4.4       5.9   
+         34             6.8       0.9            1.0       {\ldots}         7.5       5.2   
+         35             9.7       1.4            9.3       {\ldots}         2.0       3.4   
+         36             9.8       7.8            7.1       {\ldots}         1.4       1.8   
+         37             6.7       0.2            0.2       {\ldots}         0.4       6.0   
+         38             6.6       2.4            1.1       {\ldots}         5.1       5.4   
+         39             3.7       0.0            2.7       {\ldots}         0.0       5.2   
+         40             0.9       1.1            4.6       {\ldots}         0.5       2.3   
+         41             8.9       9.6            8.7       {\ldots}         1.5       8.4   
+         42             7.7       5.7            0.6       {\ldots}         8.4       9.0   
+         43             4.4       1.8            1.9       {\ldots}         1.2       2.1   
+         44             9.8       7.2            0.7       {\ldots}         4.4       8.9   
+         45             4.6       4.6            1.5       {\ldots}         8.4       8.9   
+         46             9.0       5.9            8.6       {\ldots}         8.1       8.7   
+         47             9.1       7.1            5.8       {\ldots}         1.7       5.3   
+         48             9.9       0.3            1.4       {\ldots}         7.0       6.8   
+         49             7.1       8.0            4.7       {\ldots}         1.4       9.8   
+         
+             Social Media  Reading  Socializing  Gaming  Entertainment Spending  \textbackslash{}
+         0            5.7      4.7          7.8     8.8                     4.0   
+         1            6.7      3.1          8.0     8.4                     4.8   
+         2            0.9      6.3          8.2     9.2                     4.0   
+         3            0.0      2.4          8.4     0.9                     3.7   
+         4            8.3      4.1          8.4     1.6                     9.5   
+         5            9.8      6.2          8.3     1.1                     6.0   
+         6            8.0      0.6          8.3     5.7                     6.7   
+         7            5.4      3.6          7.7     5.5                     5.5   
+         8            9.9      7.8          8.1     0.6                     6.7   
+         9            4.9      9.8          9.3     8.3                     5.7   
+         10           7.5      3.4          8.4     6.2                     4.9   
+         11           1.8      1.8          6.2     8.4                     4.8   
+         12           8.0      1.0          7.3     1.7                     6.3   
+         13           3.2      0.9          8.9     8.7                     8.6   
+         14           9.0      1.3          9.5     3.1                     8.9   
+         15           1.1      1.7          8.0     8.9                     4.4   
+         16           4.8      0.3          9.4     5.9                    10.0   
+         17           9.1      8.1          9.8     9.0                     8.1   
+         18           7.6      1.6          6.7     5.5                     4.8   
+         19           9.6      2.8          9.1     1.1                     5.9   
+         20           1.0      4.9          9.2     1.0                     5.2   
+         21           6.8      4.2          7.8     5.5                     8.2   
+         22           2.5      5.7          9.3    10.0                     4.3   
+         23           5.5      6.3          8.4     7.2                     1.5   
+         24           8.9      9.5          8.1     5.7                     9.0   
+         25           0.1      0.7          8.8     0.5                     5.7   
+         26           6.3      3.0          9.6     0.5                     6.9   
+         27           1.6      9.8          9.4     9.5                     8.2   
+         28           5.7      1.0          6.6     8.7                     6.8   
+         29           5.4      4.7          9.9     0.4                     5.8   
+         30           4.5      2.5          9.3     0.2                     5.1   
+         31           5.8     10.0          8.9     9.4                     4.2   
+         32           6.2      6.4          6.4     1.9                     3.5   
+         33           6.2      9.4          6.6     8.0                     6.2   
+         34           5.5      3.4          2.6     8.1                     0.3   
+         35           5.8      6.1          7.4     1.4                     5.1   
+         36           2.1      6.8         10.0     0.6                     4.5   
+         37           9.0      0.3          8.0     1.0                     5.3   
+         38           6.6      5.7          7.8     9.1                     4.0   
+         39           9.3      2.9          7.6     8.0                     4.2   
+         40           6.5      1.0          7.5     7.3                     7.1   
+         41           1.8      8.6          9.0     0.6                     0.3   
+         42           4.6      3.2          8.7     7.1                     7.4   
+         43           6.2      2.5          6.4     1.8                     5.5   
+         44           9.5      8.2          9.7     7.7                     8.5   
+         45           1.2      6.2          9.2     0.3                     8.8   
+         46           8.5      9.1          8.5     9.3                     6.5   
+         47           7.2      6.6          9.6     1.3                     8.4   
+         48           6.8      6.5          8.1     9.0                     6.8   
+         49           7.8      6.3          8.1     4.6                     7.1   
+         
+             Clothing Spending  Internet Spending  Retail Spending  
+         0                 7.8                5.7              6.8  
+         1                 7.0                4.7              5.3  
+         2                 2.7                3.7              3.7  
+         3                 2.0                2.8              6.5  
+         4                 5.7                3.1              7.5  
+         5                 3.4                4.3              5.2  
+         6                 5.1                4.4              5.1  
+         7                 4.4                5.2              5.8  
+         8                 4.2                2.4              9.1  
+         9                 6.2                3.0              4.3  
+         10                2.5                2.8              5.6  
+         11                5.3                6.7              7.1  
+         12                2.8                3.5              4.7  
+         13                4.9                1.1              6.0  
+         14                5.8                2.4              3.2  
+         15                4.5                1.8              3.4  
+         16                2.9                3.2              5.6  
+         17                8.4                5.9              9.7  
+         18                3.9                2.6              4.3  
+         19                4.7                4.0              6.0  
+         20                4.8                2.9              8.2  
+         21                7.4                7.3              6.2  
+         22                0.2                6.3              2.6  
+         23                0.0                5.2              8.5  
+         24                2.5                7.9              3.1  
+         25                5.8                4.1              4.5  
+         26                5.4                5.1              5.1  
+         27                8.0                4.7              9.5  
+         28                6.4                6.7              4.4  
+         29                6.0                8.9              3.9  
+         30                4.4                8.5              7.6  
+         31                4.1                1.2              1.3  
+         32                7.8                3.7              7.9  
+         33                6.3                6.1              8.1  
+         34                2.4                2.0              1.0  
+         35                1.5                1.7              2.9  
+         36                5.9                4.1              6.0  
+         37                3.1                2.8              7.6  
+         38                5.7                1.4              9.1  
+         39                0.0                8.7              2.9  
+         40                2.2                8.0              4.5  
+         41                3.5                0.8              5.8  
+         42                9.8                4.5              6.2  
+         43                4.1                4.2              5.4  
+         44                4.3                5.3              4.4  
+         45                8.7                0.7              6.0  
+         46                7.5                1.3              4.3  
+         47                7.5                7.1              9.8  
+         48                7.2                6.0              9.6  
+         49                9.9                8.7              8.7  
+         
+         [50 rows x 23 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{pred\PYZus{}df} \PY{o}{=} \PY{n}{predict\PYZus{}clusters}\PY{p}{(}\PY{n}{raw\PYZus{}df}\PY{p}{,} \PY{n}{pca}\PY{p}{,} \PY{n}{kmeans}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}
+         
+         \PY{n}{pred\PYZus{}df}
+         \PY{c+c1}{\PYZsh{}THESE ARE THE CUSTOMERS THAT THE E\PYZhy{}COMMERCE COMPANY NEEDS TO TARGET}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:}      Age  Female  Clothing Spending  Internet Spending  Cluster
+         0   21.0       1                7.8                5.7        1
+         11  20.0       0                5.3                6.7        1
+         17  18.0       1                8.4                5.9        1
+         21  28.0       1                7.4                7.3        0
+         26  18.0       0                5.4                5.1        2
+         28  22.0       1                6.4                6.7        0
+         29  19.0       0                6.0                8.9        2
+         33  30.0       0                6.3                6.1        0
+         47  26.0       0                7.5                7.1        0
+         48  23.0       1                7.2                6.0        1
+         49  17.0       1                9.9                8.7        0
+\end{Verbatim}
+            
+    \#\#\#
+
+Conclusion
+
+    \paragraph{In conclusion, we we're able tu succesfuly cluster those
+customers that have a high probability of spending online on clothing
+for the e-commerce company. As I said before, the ideal scenario would
+be to deploy 10+ models and observed their performance over some time.
+It would be incorrect to state that our algorithm is the "best", however
+it does accomplish the task with a certain level of
+success.}\label{in-conclusion-we-were-able-tu-succesfuly-cluster-those-customers-that-have-a-high-probability-of-spending-online-on-clothing-for-the-e-commerce-company.-as-i-said-before-the-ideal-scenario-would-be-to-deploy-10-models-and-observed-their-performance-over-some-time.-it-would-be-incorrect-to-state-that-our-algorithm-is-the-best-however-it-does-accomplish-the-task-with-a-certain-level-of-success.}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
